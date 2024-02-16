@@ -536,7 +536,10 @@ export function status<E = never>(status: Status): Middleware<StatusOpen, Header
  * @category constructors
  * @since 0.7.0
  */
-export function header<E = never>(name: string, value: string): Middleware<HeadersOpen, HeadersOpen, E, void> {
+export function header<E = never>(
+  name: string,
+  value: string | ReadonlyArray<string>
+): Middleware<HeadersOpen, HeadersOpen, E, void> {
   return modifyConnection((c) => c.setHeader(name, value))
 }
 

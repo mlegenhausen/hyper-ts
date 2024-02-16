@@ -1476,7 +1476,7 @@ Added in v0.7.0
 ```ts
 export declare function header<R, E = never>(
   name: string,
-  value: string
+  value: string | ReadonlyArray<string>
 ): ReaderMiddleware<R, H.HeadersOpen, H.HeadersOpen, E, void>
 ```
 

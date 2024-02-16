@@ -1115,7 +1115,10 @@ Returns a middleware that writes the given header
 **Signature**
 
 ```ts
-export declare function header<E = never>(name: string, value: string): Middleware<HeadersOpen, HeadersOpen, E, void>
+export declare function header<E = never>(
+  name: string,
+  value: string | ReadonlyArray<string>
+): Middleware<HeadersOpen, HeadersOpen, E, void>
 ```
 
 Added in v0.7.0

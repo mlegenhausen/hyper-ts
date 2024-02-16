@@ -434,7 +434,7 @@ export function status<R, E = never>(status: H.Status): ReaderMiddleware<R, H.St
  */
 export function header<R, E = never>(
   name: string,
-  value: string
+  value: string | ReadonlyArray<string>
 ): ReaderMiddleware<R, H.HeadersOpen, H.HeadersOpen, E, void> {
   return () => M.header(name, value)
 }

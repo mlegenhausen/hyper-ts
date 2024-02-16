@@ -19,7 +19,7 @@ export type Action =
   | { type: 'setBody'; body: unknown }
   | { type: 'endResponse' }
   | { type: 'setStatus'; status: Status }
-  | { type: 'setHeader'; name: string; value: string }
+  | { type: 'setHeader'; name: string; value: string | ReadonlyArray<string> }
   | { type: 'clearCookie'; name: string; options: CookieOptions }
   | { type: 'setCookie'; name: string; value: string; options: CookieOptions }
   | { type: 'pipeStream'; stream: NodeJS.ReadableStream; onError: (e: unknown) => IO.IO<void> }
@@ -104,7 +104,7 @@ export class ExpressConnection<S> implements Connection<S> {
   /**
    * @since 0.5.0
    */
-  setHeader(name: string, value: string): ExpressConnection<HeadersOpen> {
+  setHeader(name: string, value: string | ReadonlyArray<string>): ExpressConnection<HeadersOpen> {
     return this.chain({ type: 'setHeader', name, value })
   }
   /**
@@ -145,7 +145,7 @@ function run(res: Response, action: Action): Response {
     case 'setCookie':
       return res.cookie(action.name, action.value, action.options)
     case 'setHeader':
-      res.setHeader(action.name, action.value)
+      res.setHeader(action.name, typeof action.value === 'string' ? action.value : Array.from(action.value))
       return res
     case 'setStatus':
       return res.status(action.status)

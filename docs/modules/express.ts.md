@@ -161,7 +161,7 @@ Added in v0.5.0
 **Signature**
 
 ```ts
-setHeader(name: string, value: string): ExpressConnection<HeadersOpen>
+setHeader(name: string, value: string | ReadonlyArray<string>): ExpressConnection<HeadersOpen>
 ```
 
 Added in v0.5.0
